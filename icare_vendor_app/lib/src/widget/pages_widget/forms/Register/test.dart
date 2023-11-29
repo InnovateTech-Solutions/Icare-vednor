@@ -1,49 +1,54 @@
-/*import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:icare_vendor_app/getx/map_controller.dart';
-import 'package:icare_vendor_app/widget/text_widget/form_text.dart';
+import 'dart:async';
 
-class MapWidget extends StatefulWidget {
-  const MapWidget({super.key});
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+class MapSample extends StatefulWidget {
+  const MapSample({super.key});
 
   @override
-  State<MapWidget> createState() => MapWidgetState();
+  State<MapSample> createState() => MapSampleState();
 }
 
-class MapWidgetState extends State<MapWidget> {
-  final MapController mapController = Get.put(MapController());
+class MapSampleState extends State<MapSample> {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  static const CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: GoogleMap(
-          mapType: MapType.normal,
-          myLocationEnabled: true,
-          myLocationButtonEnabled: true,
-          markers: mapController.markers,
-          initialCameraPosition: const CameraPosition(
-              target: LatLng(37.422131, -122.084801),
-              tilt: 59.440717697143555,
-              zoom: 10.5),
-          onMapCreated: (controller) {
-            mapController.mapController = controller;
-          },
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            mapController.position();
-            print(mapController.pos);
-          },
-          label: textFieldLabel("Current location"),
-          icon: const Icon(Icons.location_history),
-        ),
+    return Scaffold(
+      body: GoogleMap(
+        mapType: MapType.hybrid,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: const Text('To the lake!'),
+        icon: const Icon(Icons.directions_boat),
       ),
     );
   }
-}
 
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    await controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+  }
+}
+/*
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -302,97 +307,98 @@ class _CheckConditionBeforeNavigatingBackState
       ),
     );
   }
-}
-*/
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+// }
+// */
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:get/get.dart';
 
-import '../../../../constant/app_constant.dart';
-import '../../../../constant/color.dart';
-import '../../../../getx/profile_controller.dart';
-import '../../../../getx/register_controller.dart';
-import '../../../../model/login_model.dart';
-import '../../../constant_widget/sizes/sized_box.dart';
-import '../../../custom_widget.dart/form_widget.dart';
-import '../../../text_widget/form_text.dart';
+// import '../../../../constant/app_constant.dart';
+// import '../../../../constant/color.dart';
+// import '../../../../getx/map_controller.dart';
+// import '../../../../getx/profile_controller.dart';
+// import '../../../../getx/register_controller.dart';
+// import '../../../../model/login_model.dart';
+// import '../../../constant_widget/sizes/sized_box.dart';
+// import '../../../custom_widget.dart/form_widget.dart';
+// import '../../../text_widget/form_text.dart';
 
-final registerController = Get.put(RegisterController());
-final profileController = Get.put(ProfileController());
+// final registerController = Get.put(RegisterController());
+// final profileController = Get.put(ProfileController());
 
-void showDialoge(BuildContext context) {
-  showGeneralDialog(
-    barrierLabel: "Label",
-    barrierDismissible: true,
-    barrierColor: Colors.black.withOpacity(0.5),
-    transitionDuration: const Duration(milliseconds: 700),
-    context: context,
-    pageBuilder: (context, anim1, anim2) {
-      return SizedBox(
-        height: 300,
-        child: Form(
-          key: profileController.formkey,
-          child: SizedBox(
-            width: 250.w,
-            height: 270.h,
-            child: ListView(
-              children: [
-                FormText.textFieldLabel(AppConst.phoneNumber),
-                FormWidget(
-                    login: Login(
-                        controller: registerController.phoneNumber,
-                        enableText: false,
-                        hintText: AppConst.phoneNumber,
-                        icon: const Icon(Icons.phone),
-                        invisible: false,
-                        validator: (number) =>
-                            registerController.validPhoneNumber(number),
-                        onTap: () {},
-                        type: TextInputType.phone,
-                        inputFormat: [registerController.maskFormatterPhone]),
-                    color: ColorConstants.mainScaffoldBackgroundColor),
-                AppSizes.xsmallHeightSizedBox,
-                FormText.textFieldLabel("Address"),
-                FormWidget(
-                    login: Login(
-                        controller: registerController.address,
-                        enableText: false,
-                        hintText: "Address",
-                        icon: const Icon(Icons.location_city),
-                        invisible: false,
-                        validator: (address) =>
-                            registerController.validateAddress(),
-                        onTap: () {},
-                        type: TextInputType.text,
-                        inputFormat: null),
-                    color: ColorConstants.mainScaffoldBackgroundColor),
-                AppSizes.xsmallHeightSizedBox,
-                FormText.textFieldLabel(AppConst.email),
-                FormWidget(
-                    login: Login(
-                        controller: registerController.email,
-                        enableText: false,
-                        hintText: AppConst.email,
-                        icon: const Icon(Icons.email),
-                        invisible: false,
-                        validator: (email) =>
-                            registerController.validateEmail(email),
-                        onTap: () {},
-                        type: TextInputType.emailAddress,
-                        inputFormat: null),
-                    color: ColorConstants.mainScaffoldBackgroundColor)
-              ],
-            ),
-          ),
-        ),
-      );
-    },
-    transitionBuilder: (context, anim1, anim2, child) {
-      return SlideTransition(
-        position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
-            .animate(anim1),
-        child: child,
-      );
-    },
-  );
-}
+// void showDialoge(BuildContext context) {
+//   showGeneralDialog(
+//     barrierLabel: "Label",
+//     barrierDismissible: true,
+//     barrierColor: Colors.black.withOpacity(0.5),
+//     transitionDuration: const Duration(milliseconds: 700),
+//     context: context,
+//     pageBuilder: (context, anim1, anim2) {
+//       return SizedBox(
+//         height: 300,
+//         child: Form(
+//           key: profileController.formkey,
+//           child: SizedBox(
+//             width: 250.w,
+//             height: 270.h,
+//             child: ListView(
+//               children: [
+//                 FormText.textFieldLabel(AppConst.phoneNumber),
+//                 FormWidget(
+//                     login: Login(
+//                         controller: registerController.phoneNumber,
+//                         enableText: false,
+//                         hintText: AppConst.phoneNumber,
+//                         icon: const Icon(Icons.phone),
+//                         invisible: false,
+//                         validator: (number) =>
+//                             registerController.validPhoneNumber(number),
+//                         onTap: () {},
+//                         type: TextInputType.phone,
+//                         inputFormat: [registerController.maskFormatterPhone]),
+//                     color: ColorConstants.mainScaffoldBackgroundColor),
+//                 AppSizes.xsmallHeightSizedBox,
+//                 FormText.textFieldLabel("Address"),
+//                 FormWidget(
+//                     login: Login(
+//                         controller: registerController.address,
+//                         enableText: false,
+//                         hintText: "Address",
+//                         icon: const Icon(Icons.location_city),
+//                         invisible: false,
+//                         validator: (address) =>
+//                             registerController.validateAddress(),
+//                         onTap: () {},
+//                         type: TextInputType.text,
+//                         inputFormat: null),
+//                     color: ColorConstants.mainScaffoldBackgroundColor),
+//                 AppSizes.xsmallHeightSizedBox,
+//                 FormText.textFieldLabel(AppConst.email),
+//                 FormWidget(
+//                     login: Login(
+//                         controller: registerController.email,
+//                         enableText: false,
+//                         hintText: AppConst.email,
+//                         icon: const Icon(Icons.email),
+//                         invisible: false,
+//                         validator: (email) =>
+//                             registerController.validateEmail(email),
+//                         onTap: () {},
+//                         type: TextInputType.emailAddress,
+//                         inputFormat: null),
+//                     color: ColorConstants.mainScaffoldBackgroundColor)
+//               ],
+//             ),
+//           ),
+//         ),
+//       );
+//     },
+//     transitionBuilder: (context, anim1, anim2, child) {
+//       return SlideTransition(
+//         position: Tween(begin: const Offset(0, 1), end: const Offset(0, 0))
+//             .animate(anim1),
+//         child: child,
+//       );
+//     },
+//   );
+// }

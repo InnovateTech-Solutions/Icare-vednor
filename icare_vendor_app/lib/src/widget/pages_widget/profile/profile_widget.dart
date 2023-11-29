@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:icare_vendor_app/src/widget/pages_widget/forms/Register/test.dart';
+import 'package:icare_vendor_app/src/widget/pages_widget/profile/contact_dialog.dart';
 
 import '../../../constant/color.dart';
 import '../../../model/profile_model.dart';

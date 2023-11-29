@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../constant/app_constant.dart';
 import '../../../../constant/color.dart';
 import '../../../../getx/register_controller.dart';
@@ -58,7 +59,8 @@ class _PersonalDetailWidgetState extends State<PersonalDetailWidget> {
                 hintText: "Description",
                 icon: const Icon(Icons.email),
                 invisible: false,
-                validator: (email) => controller.validateDescription(),
+                validator: null,
+                // (email) => controller.validateDescription(),
                 type: TextInputType.emailAddress,
                 inputFormat: null,
               ),

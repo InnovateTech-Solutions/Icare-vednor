@@ -11,7 +11,7 @@ class MapWidget extends StatefulWidget {
   State<MapWidget> createState() => _MapWidgetState();
 }
 
-const kGoogleApiKey = 'AIzaSyCTq7XERAnMOWFrdk8ENIBD1CeAh2tIYcI';
+const kGoogleApiKey = 'AIzaSyBXjpgvW56b3tAk_fyw6Urr19FAxG4MMv8';
 final homeScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _MapWidgetState extends State<MapWidget> {
