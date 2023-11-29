@@ -19,7 +19,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.symmetric(),
       child: Column(
         children: [
           Expanded(
