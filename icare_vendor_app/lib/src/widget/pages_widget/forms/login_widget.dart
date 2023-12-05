@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:icare_vendor_app/src/helpers/local_storage/shared_prefrencess.dart';
+import 'package:icare_vendor_app/src/repository/vendor_repository/vendor_repository.dart';
 
 import '../../../constant/app_constant.dart';
 import '../../../constant/color.dart';
 import '../../../getx/login_controller.dart';
 import '../../../model/login_model.dart';
-import '../../../view/main_page.dart';
 import '../../constant_widget/const_wiidget/constant_widget.dart';
 import '../../constant_widget/sizes/sized_box.dart';
 import '../../custom_widget.dart/button_widget.dart';
@@ -81,7 +82,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                   FormText.forgetPasswordText(context),
                   AppSizes.mediumHeightSizedBox,
                   ButtonWidget(
-                      onTap: () => controller.onLogin(), tilte: AppConst.login),
+                    onTap: () => {
+                      controller.onLogin(),
+                      UserRepository.instance.getVendor(controller.email.text),
+                      LocalUserController.instance.logIn(),
+                    },
+                    tilte: AppConst.login,
+                  ),
                   ConstantWidget.dontHaveAccountRow(),
                 ],
               ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../constant/color.dart';
-import 'navbar_pages/services_page.dart';
+import 'services/services_page.dart';
 import 'profile/profile_page.dart';
 
 class MainPage extends StatefulWidget {

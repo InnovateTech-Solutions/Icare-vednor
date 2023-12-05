@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:icare_vendor_app/src/model/vendor_model.dart';
+import 'package:icare_vendor_app/src/repository/authentication/authentication_repository.dart';
+import 'package:icare_vendor_app/src/repository/vendor_repository/vendor_repository.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../constant/color.dart';
 import '../widget/constant_widget/const_wiidget/constant_widget.dart';
-import '../widget/loading_page.dart';
+import '../../test/home_page.dart';
 
 class RegisterController extends GetxController {
   static RegisterController get instance => Get.find();
@@ -169,7 +172,23 @@ class RegisterController extends GetxController {
     } else if (activeStep.value == 3) {
       if (workingFormkey.currentState!.validate() &&
           selectedContainers.isNotEmpty) {
-        Get.to(const LoadingPage());
+        Get.to(MyHomePage());
+        AuthenticationRepository.instance.createUserWithEmailAndPassword(
+            email.text.trim(), password.text.trim());
+        UserRepository().createUser(VendorModel(
+            status: false,
+            username: vendorName.text.trim(),
+            password: password.text.trim(),
+            email: email.text.trim(),
+            phoneNumber: phoneNumber.text.trim(),
+            businessLicense: 'businessLicense',
+            businesImage: 'businesImage',
+            category: '',
+            decription: description.text.trim(),
+            address: address.text.trim(),
+            coordanits: 'coordanits',
+            opendayes: ['operHour.toString()'],
+            openClose: 'openClose'));
       } else {
         Get.snackbar("ERROR", "MAKE SURE ALL FIELDS ARE FILLED IN",
             snackPosition: SnackPosition.BOTTOM,

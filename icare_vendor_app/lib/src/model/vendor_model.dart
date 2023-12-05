@@ -15,7 +15,6 @@ class VendorModel {
   final List<String> opendayes;
   final String openClose;
   final bool status;
-
   VendorModel({
     this.id,
     required this.status,
@@ -32,7 +31,6 @@ class VendorModel {
     required this.opendayes,
     required this.openClose,
   });
-
   tojson() {
     return {
       'Name': username,
@@ -51,16 +49,13 @@ class VendorModel {
     };
   }
 
-  factory VendorModel.fromSnapShot(
-      DocumentSnapshot<Map<String, dynamic>> documentSnapshot) {
-    final data = documentSnapshot.data()!;
-
+  factory VendorModel.fromSnapShot(QueryDocumentSnapshot snapshot) {
+    var data = snapshot.data() as Map<String, dynamic>;
     return VendorModel(
-      id: documentSnapshot.id,
-      username: data['Name'],
-      password: data['email'],
-      email: data['password'],
-      phoneNumber: data['phoneNumber'],
+      id: snapshot.id,
+      username: data['Name'] ?? '',
+      email: data['email'] ?? '',
+      phoneNumber: data['phoneNumber'] ?? '',
       businessLicense: data['businessLicense'],
       businesImage: data['Image'],
       category: data['Category'],
@@ -69,7 +64,8 @@ class VendorModel {
       coordanits: data['Coordinates'],
       opendayes: (data["opendayes"] as List).map((e) => e.toString()).toList(),
       openClose: data['opentime'],
-      status: data['satus'] as bool,
+      status: data['status'] as bool,
+      password: data['password'],
     );
   }
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:icare_vendor_app/test/local_storage.dart';
+import 'package:icare_vendor_app/test/vendor_details.dart';
 
 import '../../../constant/app_constant.dart';
 import '../../../view/forms/login_page.dart';
@@ -42,6 +44,11 @@ class LandingWidget extends StatelessWidget {
             ButtonWidget(
                 onTap: () {
                   Get.to(const RegisterPage());
+                },
+                tilte: AppConst.signUp),
+            ButtonWidget(
+                onTap: () {
+                  Get.to(LoginScreen());
                 },
                 tilte: AppConst.signUp)
           ],

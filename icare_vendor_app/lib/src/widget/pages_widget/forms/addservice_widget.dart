@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../../../constant/color.dart';
 import '../../../getx/services_controller.dart';
 import '../../../model/login_model.dart';
-import '../../../model/services_model.dart';
+import '../../../model/servicescontainter_model.dart';
 import '../../constant_widget/const_wiidget/constant_widget.dart';
 import '../../constant_widget/sizes/sized_box.dart';
 import '../../custom_widget.dart/form_widget.dart';
@@ -109,7 +109,7 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
               ),
             ),
             ConstantWidget.addServiceButton(() {
-              controller.addService(ServicesModel(
+              controller.addService(ServicesContainerModel(
                   mainLabel: controller.service.text,
                   description: controller.description.text,
                   price: controller.price.text,

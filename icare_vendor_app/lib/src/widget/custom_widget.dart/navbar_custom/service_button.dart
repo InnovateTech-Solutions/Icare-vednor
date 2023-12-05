@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 import '../../../constant/color.dart';
 import '../../../getx/services_controller.dart';
-import '../../../model/services_model.dart';
+import '../../../model/servicescontainter_model.dart';
 import '../../constant_widget/sizes/sized_box.dart';
 import '../../pages_widget/partial_widget/service_partial/service_dialog.dart';
 import '../../text_widget/service_text.dart';
@@ -12,7 +12,7 @@ import '../../text_widget/service_text.dart';
 // ignore: must_be_immutable
 class SrevicesButton extends StatelessWidget {
   SrevicesButton({super.key, required this.services});
-  ServicesModel services;
+  ServicesContainerModel services;
   final controller = Get.put(ServicesController());
   @override
   Widget build(BuildContext context) {

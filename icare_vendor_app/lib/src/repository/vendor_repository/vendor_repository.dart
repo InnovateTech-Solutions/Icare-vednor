@@ -48,12 +48,14 @@ class UserRepository extends GetxController {
   }
 
   Future<VendorModel> getVendorDetails(String email) async {
-    final snapshot =
-        await _db.collection("User").where("Email", isEqualTo: email).get();
+    final snapshot = await _db
+        .collection("Vendors_Test")
+        .where("email", isEqualTo: email)
+        .get();
     final userdata =
         snapshot.docs.map((e) => VendorModel.fromSnapShot(e)).single;
     vendorModel = userdata;
-    userController.saveUserInfo(userdata);
+    userController.saveUserInfo(vendorModel);
     return userdata;
   }
 
@@ -137,5 +139,23 @@ class UserRepository extends GetxController {
     }
 
     return exists;
+  }
+
+  Future<VendorModel> getVendor(String email) async {
+    final snapshot = await _db
+        .collection("Vendors_Test")
+        .where("email", isEqualTo: email)
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      final userdata =
+          snapshot.docs.map((e) => VendorModel.fromSnapShot(e)).single;
+
+      userController.saveUserInfo(userdata);
+
+      return userdata;
+    } else {
+      throw Exception("Vendor not found for email: $email");
+    }
   }
 }

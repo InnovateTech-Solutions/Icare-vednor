@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:icare_vendor_app/src/view/main_page.dart';
+import 'package:icare_vendor_app/src/repository/authentication/authentication_repository.dart';
 
 import '../constant/color.dart';
 
@@ -26,17 +26,25 @@ class LoginController extends GetxController {
 
   Future onLogin() async {
     if (formkey.currentState!.validate()) {
-      Get.snackbar("Success", "Login Successful",
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: ColorConstants.mainScaffoldBackgroundColor,
-          backgroundColor: ColorConstants.snakbarColorsuccessful);
-      Get.to(const MainPage());
+      Future<bool> code = AuthenticationRepository()
+          .login(email.text.trim(), password.text.trim());
+      if (await code) {
+        Get.snackbar("Success", "Login Successful",
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: ColorConstants.mainScaffoldBackgroundColor,
+            backgroundColor: ColorConstants.snakbarColorsuccessful);
+      } else {
+        Get.snackbar("ERROR", "Email or Password is invild",
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: ColorConstants.mainScaffoldBackgroundColor,
+            backgroundColor: ColorConstants.snakbarColorError);
+      }
+      return;
     } else {
       Get.snackbar("ERROR", "Email or Password is invild",
           snackPosition: SnackPosition.BOTTOM,
           colorText: ColorConstants.mainScaffoldBackgroundColor,
           backgroundColor: ColorConstants.snakbarColorError);
     }
-    return;
   }
 }

@@ -1,10 +1,10 @@
-class ServicesModel {
+class ServicesContainerModel {
   String mainLabel;
   String description;
   String duration;
   String price;
 
-  ServicesModel(
+  ServicesContainerModel(
       {required this.mainLabel,
       required this.description,
       required this.price,

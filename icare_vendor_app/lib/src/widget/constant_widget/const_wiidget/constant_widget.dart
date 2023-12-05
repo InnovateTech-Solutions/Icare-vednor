@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icare_vendor_app/src/repository/authentication/authentication_repository.dart';
 
 import '../../../constant/color.dart';
 import '../../../model/profile_model.dart';
-import '../../../view/forms/addservices_page.dart';
+import '../../../view/services/addservices_page.dart';
 import '../../text_widget/form_text.dart';
 import '../../text_widget/profile_text.dart';
 
@@ -26,7 +27,7 @@ class ConstantWidget {
     return ClipOval(
       child: GestureDetector(
         onTap: () {
-          Get.to(const AddServicePage());
+          AuthenticationRepository.instance.logout();
         },
         child: Container(
           width: 60,

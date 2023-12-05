@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:icare_vendor_app/src/constant/color.dart';
+import 'package:icare_vendor_app/src/widget/constant_widget/sizes/sized_box.dart';
+import 'package:icare_vendor_app/src/widget/text_widget/loading_text.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../constant/color.dart';
-import 'constant_widget/sizes/sized_box.dart';
-import 'text_widget/loading_text.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});

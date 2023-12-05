@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../constant/color.dart';
-import '../model/services_model.dart';
+import '../model/servicescontainter_model.dart';
 
 class ServicesController extends GetxController {
   static ServicesController get instance => Get.find();
@@ -11,33 +11,33 @@ class ServicesController extends GetxController {
   final TextEditingController description = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController duration = TextEditingController();
-  RxList<ServicesModel> services = <ServicesModel>[
-    ServicesModel(
+  RxList<ServicesContainerModel> services = <ServicesContainerModel>[
+    ServicesContainerModel(
         mainLabel: "Services1",
         duration: "1 H",
         price: "25 jod",
         description: "Description"),
-    ServicesModel(
+    ServicesContainerModel(
         mainLabel: "Services2",
         duration: "2 H",
         price: "25 jod",
         description: "Description"),
-    ServicesModel(
+    ServicesContainerModel(
         mainLabel: "Services3",
         duration: "4 H",
         price: "25 jod",
         description: "Description"),
-    ServicesModel(
+    ServicesContainerModel(
         mainLabel: "Services4",
         duration: "5 H",
         price: "25 jod",
         description: "Description"),
-    ServicesModel(
+    ServicesContainerModel(
         mainLabel: "Services5",
         duration: "1 H",
         price: "25 jod",
         description: "Description"),
-    ServicesModel(
+    ServicesContainerModel(
       mainLabel: "Services",
       duration: "1 H",
       price: "25 jod",
@@ -77,7 +77,7 @@ class ServicesController extends GetxController {
     }
   }
 
-  Future addService(ServicesModel servicesModel) async {
+  Future addService(ServicesContainerModel servicesModel) async {
     if (formKey.currentState!.validate()) {
       Get.back();
       Get.snackbar("Success", "Service Added Successful",

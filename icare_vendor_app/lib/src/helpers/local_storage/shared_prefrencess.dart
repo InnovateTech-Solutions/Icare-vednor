@@ -6,7 +6,7 @@ class LocalUserController extends GetxController {
   static LocalUserController get instance => Get.find();
 
   final RxString vendorusername = ''.obs;
-  final RxString email = ''.obs;
+  final RxString email = 'no email '.obs;
   final RxString phone = ''.obs;
   var isLoggedIn = false.obs;
   RxBool notification = false.obs;

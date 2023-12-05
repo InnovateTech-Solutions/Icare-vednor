@@ -57,6 +57,8 @@ dependencies:
   firebase_auth: ^4.15.0
   shared_preferences: ^2.2.2
   firebase_storage: ^11.5.3
+  firebase_core: ^2.24.0
+  cached_network_image: ^3.3.0
 
 
 

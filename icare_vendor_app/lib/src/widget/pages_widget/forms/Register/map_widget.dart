@@ -42,7 +42,7 @@ class _MapWidgetState extends State<MapWidget> {
               onPressed: () => Get.back(), child: const Text("Add Coordinate")),
         ),
         Positioned(
-          top: 10,
+          top: 30,
           child: ElevatedButton(
               onPressed: () {
                 mapController.handlePressButton(context);

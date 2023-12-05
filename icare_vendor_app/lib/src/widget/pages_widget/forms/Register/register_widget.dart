@@ -19,7 +19,7 @@ class _RegisterWidgetState extends State<RegisterWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Column(
         children: [
           Expanded(
@@ -43,11 +43,13 @@ class _RegisterWidgetState extends State<RegisterWidget> {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               RegisterButton(
                 color: ColorConstants.secondaryScaffoldBacground,
-                onTap: () => {controller.continued()},
+                onTap: () => {
+                  controller.continued(),
+                },
                 tilte: 'Next',
               ),
               RegisterButton(
