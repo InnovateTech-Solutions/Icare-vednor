@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:icare_vendor_app/src/model/vendor_model.dart';
+import 'package:icare_vendor_app/src/core/model/vendor_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalUserController extends GetxController {

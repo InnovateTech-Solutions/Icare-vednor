@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:icare_vendor_app/firebase_options.dart';
-import 'package:icare_vendor_app/src/constant/color.dart';
+import 'package:icare_vendor_app/src/core/constant/color.dart';
 import 'package:icare_vendor_app/src/helpers/local_storage/shared_prefrencess.dart';
-import 'package:icare_vendor_app/src/repository/authentication/authentication_repository.dart';
-import 'package:icare_vendor_app/src/view/forms/langing_page.dart';
+import 'package:icare_vendor_app/src/core/usecase/authentication/authentication_repository.dart';
+import 'package:icare_vendor_app/src/feature/start/view/langing_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,10 +28,10 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
+          title: 'Icare Business',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
-                seedColor: ColorConstants.secondaryScaffoldBacground),
+                seedColor: AppColor.secondaryScaffoldBacground),
             useMaterial3: true,
           ),
           home: const LandingPage(),
