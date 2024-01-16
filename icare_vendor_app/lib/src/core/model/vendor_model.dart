@@ -10,7 +10,7 @@ class VendorModel {
   String businesImage;
   final String category;
   final String decription;
-  final String address;
+  final String? address;
   final String coordanits;
   final List<String> opendayes;
   final String openClose;

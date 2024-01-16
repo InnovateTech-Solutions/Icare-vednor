@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 class FormModel {
   TextEditingController controller = TextEditingController();
   String hintText;
-  Icon icon;
+  Icon? icon;
   bool invisible;
   bool enableText;
   VoidCallback onTap;
@@ -17,7 +17,7 @@ class FormModel {
       {required this.controller,
       required this.enableText,
       required this.hintText,
-      required this.icon,
+      this.icon,
       required this.invisible,
       required this.validator,
       required this.onTap,

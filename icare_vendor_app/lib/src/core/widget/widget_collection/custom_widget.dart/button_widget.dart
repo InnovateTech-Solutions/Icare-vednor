@@ -5,10 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../constant/color.dart';
 
 class ButtonWidget extends StatelessWidget {
-  const ButtonWidget({Key? key, required this.onTap, required this.tilte})
+  const ButtonWidget(
+      {Key? key, required this.onTap, required this.color, required this.tilte})
       : super(key: key);
   final String tilte;
   final VoidCallback onTap;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,16 +19,19 @@ class ButtonWidget extends StatelessWidget {
         width: 143.w,
         height: 60.h,
         decoration: BoxDecoration(
+            border: Border.all(color: AppColor.mainTextColor, width: 2),
             borderRadius: const BorderRadius.all(Radius.circular(15)),
-            color: AppColor.secondaryScaffoldBacground),
+            color: color),
         child: Center(
           child: Text(
             tilte,
-            style: GoogleFonts.poppins(
+            style: GoogleFonts.inter(
                 textStyle: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.normal,
-                    color: AppColor.mainTextColor)),
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: color == AppColor.mainTextColor
+                        ? AppColor.mainScaffoldBackgroundColor
+                        : AppColor.mainTextColor)),
           ),
         ),
       ),

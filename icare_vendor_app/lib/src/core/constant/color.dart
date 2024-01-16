@@ -10,4 +10,8 @@ class AppColor {
   static Color subTextColor = const Color(0xffC91416);
   static Color buttonColor = const Color(0xffEC6453);
   static Color backProductButton = const Color(0xffE0E1E3);
+  static Color blackColor = const Color(0xff000000);
+  static Color fadeColor = const Color(0xff717784);
+  static Color boarderColor = const Color(0xffE5E7EB);
+  static Color formColor = const Color(0xffF9FAFB);
 }

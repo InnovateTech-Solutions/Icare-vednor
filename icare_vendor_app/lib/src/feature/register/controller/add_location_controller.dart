@@ -1,7 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_api_headers/google_api_headers.dart';
@@ -18,9 +20,13 @@ class AddLocation extends GetxController {
     target: LatLng(37.422131, -122.084801),
   );
   Set<Marker> markers = {};
+  Rx<BitmapDescriptor> markerIcon = BitmapDescriptor.defaultMarker.obs;
+  late String mapStyleString;
+
   final markersList = <Marker>[].obs;
   late GoogleMapController googleMapController;
   final Mode mode = Mode.overlay;
+  Rx address = "Loading...".obs;
 
 //permission
   Future<Position> determinePosition() async {
@@ -51,7 +57,7 @@ class AddLocation extends GetxController {
     return position;
   }
 
-  Future<(double, double)> displayPrediction(
+  Future<String> displayPrediction(
       Prediction p, ScaffoldState? currentState) async {
     GoogleMapsPlaces places = GoogleMapsPlaces(
         apiKey: kGoogleApiKey,
@@ -61,10 +67,11 @@ class AddLocation extends GetxController {
 
     final lat = detail.result.geometry!.location.lat;
     final lng = detail.result.geometry!.location.lng;
-    final coordinates = (lat, lng);
+    final coordinates = '$lat,$lng';
     markersList.clear();
     markersList.add(Marker(
         markerId: const MarkerId("0"),
+        icon: markerIcon.value,
         position: LatLng(lat, lng),
         infoWindow: InfoWindow(title: detail.result.name)));
 
@@ -72,7 +79,43 @@ class AddLocation extends GetxController {
         .animateCamera(CameraUpdate.newLatLngZoom(LatLng(lat, lng), 14.0));
 
     coordinate.text = coordinates.toString();
+
+    getAddressFromCoordinates(lat, lng);
+
+    print(coordinate.text);
     return coordinates;
+  }
+
+  Future<void> getAddressFromCoordinates(latitude, longitude) async {
+    try {
+      List<Placemark> placemarks =
+          await placemarkFromCoordinates(latitude, longitude);
+
+      if (placemarks.isNotEmpty) {
+        Placemark placemark = placemarks[0];
+        address.value =
+            "${placemark.street}, ${placemark.locality}, ${placemark.country}";
+      }
+      print(address.value);
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
+  //custom Marker
+  Future<void> addCustomMarker() async {
+    ImageConfiguration configuration =
+        const ImageConfiguration(size: Size(150, 150));
+    await BitmapDescriptor.fromAssetImage(
+            configuration, "assets/image/Location.png")
+        .then((icon) {
+      markerIcon.value = icon;
+    });
+  }
+
+  Future<void> loadMapStyle() async {
+    mapStyleString =
+        await rootBundle.loadString('assets/style/google_map.json');
   }
 
   //validation
@@ -113,10 +156,11 @@ class AddLocation extends GetxController {
                 borderRadius: BorderRadius.circular(20),
                 borderSide: const BorderSide(color: Colors.white))),
         components: [
-          Component(Component.country, "pk"),
+          Component(Component.country, "Jo"),
           Component(Component.country, "uk")
         ]);
 
     displayPrediction(p!, homeScaffoldKey.currentState);
+    print(homeScaffoldKey.currentState);
   }
 }

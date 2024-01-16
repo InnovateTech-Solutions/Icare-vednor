@@ -1,15 +1,16 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icare_vendor_app/src/core/usecase/authentication/authentication_repository.dart';
 
-import '../../../constant/color.dart';
 import '../../../../feature/profile/model/profile_model.dart';
+import '../../../constant/color.dart';
 import '../../text_widget/form_text.dart';
 import '../../text_widget/profile_text.dart';
 
-final Color selectedColor = AppColor.backProductButton;
+const Color selectedColor = Color(0xffF5F5F5);
 final selectedContainers = <String>[].obs;
 
 class ConstantWidget {
@@ -80,64 +81,59 @@ class ConstantWidget {
       onTap: () {
         if (selectedContainers.contains(title)) {
           selectedContainers.remove(title);
+          print(selectedContainers);
         } else {
           selectedContainers.add(title);
+          print(selectedContainers);
         }
       },
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 10.h),
-        child: Obx(() {
-          final isSelected = selectedContainers.contains(title);
+      child: Obx(() {
+        final isSelected = selectedContainers.contains(title);
 
-          return Container(
-            width: 95.w,
-            height: 70.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10.r)),
-              color: isSelected
-                  ? selectedColor
-                  : AppColor.secondaryScaffoldBacground,
-            ),
-            child: Center(
-              child: FormText.textFieldLabel(title),
-            ),
-          );
-        }),
-      ),
+        return Container(
+          width: 81.w,
+          height: 100.h,
+          margin: EdgeInsets.symmetric(vertical: 7.h, horizontal: 5.w),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(10.r)),
+            color: isSelected ? AppColor.mainTextColor : selectedColor,
+          ),
+          child: Center(
+            child: Text(title,
+                style: GoogleFonts.quicksand(
+                    textStyle: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isSelected
+                            ? selectedColor
+                            : AppColor.mainTextColor))),
+          ),
+        );
+      }),
     );
   }
 
-  static dontHaveAccountRow() {
-    return Padding(
-      padding: EdgeInsets.only(top: 8.h),
-      child: GestureDetector(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "don’t have account?",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.normal,
-                      color: AppColor.mainTextColor)),
-            ),
-            GestureDetector(
-              child: Text(
-                "Create one",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.poppins(
-                    textStyle: TextStyle(
-                        decoration: TextDecoration.underline,
-                        fontSize: 10.sp,
-                        fontWeight: FontWeight.normal,
-                        color: AppColor.mainTextColor)),
-              ),
-            )
-          ],
+  static dontHaveAccountRow(String question, String title, VoidCallback onTap) {
+    return Text.rich(TextSpan(
+        text: question,
+        style: GoogleFonts.inter(
+          textStyle: TextStyle(
+            color: AppColor.fadeColor,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
         ),
-      ),
-    );
+        children: [
+          TextSpan(
+              text: title,
+              style: GoogleFonts.inter(
+                textStyle: TextStyle(
+                  color: AppColor.mainTextColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              recognizer: TapGestureRecognizer()..onTap = onTap)
+        ]));
   }
 }

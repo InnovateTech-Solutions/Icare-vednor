@@ -1,6 +1,7 @@
 // ignore_for_file: body_might_complete_normally_catch_error, unrelated_type_equality_checks, avoid_print
 
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:icare_vendor_app/src/core/constant/color.dart';
-import 'package:icare_vendor_app/src/helpers/local_storage/shared_prefrencess.dart';
 import 'package:icare_vendor_app/src/core/model/vendor_model.dart';
+import 'package:icare_vendor_app/src/helpers/local_storage/shared_prefrencess.dart';
 import 'package:image_picker/image_picker.dart';
 
 class VendorRepository extends GetxController {

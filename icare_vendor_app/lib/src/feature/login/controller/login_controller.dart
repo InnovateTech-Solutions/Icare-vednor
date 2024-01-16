@@ -9,6 +9,7 @@ class LoginController extends GetxController {
   final formkey = GlobalKey<FormState>();
   final email = TextEditingController();
   final password = TextEditingController();
+  RxBool hide = true.obs;
 
   validateEmail(String? email) {
     if (GetUtils.isEmail(email!)) {
@@ -22,6 +23,14 @@ class LoginController extends GetxController {
       return 'Password is not vaild';
     }
     return null;
+  }
+
+  hidePassword() {
+    if (hide.value == false) {
+      hide.value = true;
+    } else if (hide.value == true) {
+      hide.value = false;
+    }
   }
 
   Future onLogin() async {

@@ -1,8 +1,10 @@
 import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:get/get.dart';
+import 'package:icare_vendor_app/src/feature/register/controller/add_image.dart';
 
 class AddPdf extends GetxController {
   static AddPdf get instance => Get.find();
@@ -11,6 +13,8 @@ class AddPdf extends GetxController {
   RxString uploadStatus = ''.obs;
   Rx<PlatformFile?> selectedFile = Rx<PlatformFile?>(null);
   RxString filePath = ''.obs;
+  RxBool isFile = false.obs;
+  final imageControllere = Get.put(AddImage());
 
   void uploadFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -43,6 +47,7 @@ class AddPdf extends GetxController {
       await addToFirestore(pdfPath, vendorName.value);
       updateUploadStatus("PDF uploaded successfully!");
       filePath.value = pdfPath;
+      print(filePath.value);
       update();
     } catch (error) {
       updateUploadStatus("Error uploading PDF");
@@ -77,6 +82,13 @@ class AddPdf extends GetxController {
       updateUploadStatus("PDFs deleted successfully!");
     } catch (error) {
       updateUploadStatus("Error deleting PDFs");
+    }
+  }
+
+  fileExpanded() {
+    isFile.value = !isFile.value;
+    if (imageControllere.isImage.value == true) {
+      imageControllere.isImage.value = false;
     }
   }
 }

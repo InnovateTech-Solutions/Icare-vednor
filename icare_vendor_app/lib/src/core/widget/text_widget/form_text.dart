@@ -43,11 +43,29 @@ class FormText {
         textAlign: TextAlign.end,
         style: GoogleFonts.poppins(
             textStyle: TextStyle(
-                decoration: TextDecoration.underline,
-                fontSize: 10,
-                fontWeight: FontWeight.normal,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
                 color: AppColor.mainTextColor)),
       ),
     );
+  }
+
+  static mainWorkingText(String title) {
+    return Text(title,
+        textAlign: TextAlign.start,
+        style: GoogleFonts.quicksand(
+            textStyle: TextStyle(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColor.blackColor)));
+  }
+
+  static secWorkingText(String title) {
+    return Text(title,
+        style: GoogleFonts.quicksand(
+            textStyle: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColor.mainTextColor)));
   }
 }

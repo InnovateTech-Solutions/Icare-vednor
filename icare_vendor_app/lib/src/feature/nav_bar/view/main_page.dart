@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../../../core/constant/color.dart';
-import '../../service/view/services_page.dart';
 import '../../profile/view/profile_page.dart';
+import '../../service/view/services_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

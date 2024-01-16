@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../view/langing_page.dart';
-import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/constant/sized_box.dart';
+import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/widget/text_widget/intro_text.dart';
+import '../view/langing_page.dart';
 
 class IntroWidget extends StatelessWidget {
   const IntroWidget({super.key});

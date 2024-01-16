@@ -8,9 +8,11 @@ class AddWorkingDays extends GetxController {
     if (selectedContainers.contains(title)) {
       selectedContainers.remove(title);
       update();
+      print(selectedContainers);
     } else {
       selectedContainers.add(title);
       update();
+      print(selectedContainers);
     }
   }
 }

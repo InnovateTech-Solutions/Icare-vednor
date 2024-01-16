@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:icare_vendor_app/src/core/usecase/authentication/authentication_repository.dart';
 
 import '../../../core/constant/constant.dart';
-import '../controller/services_controller.dart';
-import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/constant/sized_box.dart';
-import '../../../core/widget/widget_collection/custom_button/service_button.dart';
+import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/widget/text_widget/service_text.dart';
+import '../../../core/widget/widget_collection/custom_button/service_button.dart';
+import '../controller/services_controller.dart';
 
 class ServicesWidget extends StatefulWidget {
   const ServicesWidget({super.key});
@@ -25,11 +27,25 @@ class _ServicesWidgetState extends State<ServicesWidget> {
       padding: const EdgeInsets.all(18.0),
       child: Obx(
         () => controller.services.isEmpty
-            ? const Center(
-                child: Text('NO service avaliabe'),
+            ? Column(
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        print(FirebaseAuth.instance.currentUser!.email);
+                      },
+                      child: Text("data")),
+                  const Center(
+                    child: Text('NO service avaliabe'),
+                  ),
+                ],
               )
             : Column(
                 children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        AuthenticationRepository.instance.logout();
+                      },
+                      child: Text("data")),
                   ServiceText.mainHomeText(AppConst.services),
                   ConstantWidget.constDivider(),
                   AppSizes.smallHeightSizedBox,

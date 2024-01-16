@@ -3,12 +3,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../review/controller/review_controller.dart';
-import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/constant/sized_box.dart';
-import '../../../core/widget/widget_collection/custom_container/review_container.dart';
+import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/widget/text_widget/form_text.dart';
 import '../../../core/widget/text_widget/profile_text.dart';
+import '../../../core/widget/widget_collection/custom_container/review_container.dart';
+import '../../review/controller/review_controller.dart';
 
 class ReviewWidget extends StatelessWidget {
   const ReviewWidget({super.key});

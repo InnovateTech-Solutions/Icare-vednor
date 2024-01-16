@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:icare_vendor_app/src/core/usecase/authentication/authentication_repository.dart';
 
-import '../../../core/constant/color.dart';
-import '../controller/services_controller.dart';
-import '../../../core/model/form_model.dart';
-import '../model/containter_model.dart';
-import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/constant/sized_box.dart';
-import '../../../core/widget/widget_collection/custom_widget.dart/form_widget.dart';
+import '../../../core/model/form_model.dart';
+import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
 import '../../../core/widget/text_widget/form_text.dart';
 import '../../../core/widget/text_widget/service_text.dart';
+import '../../../core/widget/widget_collection/custom_widget.dart/form_widget.dart';
+import '../controller/services_controller.dart';
+import '../model/containter_model.dart';
 
 class AddServiceWidget extends StatefulWidget {
   const AddServiceWidget({super.key});
@@ -52,7 +52,6 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                         type: TextInputType.emailAddress,
                         inputFormat: null,
                       ),
-                      color: AppColor.secondaryScaffoldBacground,
                     ),
                     AppSizes.smallHeightSizedBox,
                     FormText.textFieldLabel("Description"),
@@ -69,7 +68,6 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                         type: TextInputType.emailAddress,
                         inputFormat: null,
                       ),
-                      color: AppColor.secondaryScaffoldBacground,
                     ),
                     AppSizes.smallHeightSizedBox,
                     FormText.textFieldLabel("Price"),
@@ -85,7 +83,6 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                         type: TextInputType.emailAddress,
                         inputFormat: null,
                       ),
-                      color: AppColor.secondaryScaffoldBacground,
                     ),
                     AppSizes.smallHeightSizedBox,
                     FormText.textFieldLabel("Duration"),
@@ -101,7 +98,6 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
                         type: TextInputType.number,
                         inputFormat: null,
                       ),
-                      color: AppColor.secondaryScaffoldBacground,
                     ),
                     AppSizes.largeHeightSizedBox,
                   ],
@@ -109,6 +105,7 @@ class _AddServiceWidgetState extends State<AddServiceWidget> {
               ),
             ),
             ConstantWidget.addServiceButton(() {
+              AuthenticationRepository().logout();
               controller.addService(ContainerModel(
                   mainLabel: controller.service.text,
                   description: controller.description.text,

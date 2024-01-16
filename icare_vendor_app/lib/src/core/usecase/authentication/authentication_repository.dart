@@ -3,10 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:icare_vendor_app/src/core/constant/color.dart';
-import 'package:icare_vendor_app/src/feature/nav_bar/view/main_page.dart';
-import 'package:icare_vendor_app/src/helpers/local_storage/shared_prefrencess.dart';
 import 'package:icare_vendor_app/src/core/usecase/exception/signup_email_password_failure.dart';
+import 'package:icare_vendor_app/src/feature/nav_bar/view/main_page.dart';
 import 'package:icare_vendor_app/src/feature/start/view/intro_page.dart';
+import 'package:icare_vendor_app/src/helpers/local_storage/shared_prefrencess.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();

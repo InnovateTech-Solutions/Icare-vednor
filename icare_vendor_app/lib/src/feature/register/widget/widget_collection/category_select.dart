@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icare_vendor_app/src/core/constant/color.dart';
+import 'package:icare_vendor_app/src/feature/register/controller/register_controller.dart';
 
 class CategoerySelect extends StatefulWidget {
   const CategoerySelect({super.key});
@@ -12,8 +14,7 @@ class CategoerySelect extends StatefulWidget {
 }
 
 class _CategoerySelectState extends State<CategoerySelect> {
-  String? selectedCategory;
-
+  final controller = Get.put(RegisterController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,23 +37,32 @@ class _CategoerySelectState extends State<CategoerySelect> {
                     categories.map((e) => e['Title'].toString()).toList();
 
                 return Container(
+                  padding: const EdgeInsets.all(10),
                   height: 50.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      color: AppColor.secondaryScaffoldBacground,
+                      border: Border.all(color: AppColor.boarderColor),
+                      color: AppColor.formColor,
                       borderRadius: BorderRadius.circular(7.r)),
                   child: Center(
                     child: DropdownButton(
-                      dropdownColor: AppColor.secondaryScaffoldBacground,
+                      dropdownColor: AppColor.formColor,
                       icon: Icon(
-                        Icons.arrow_drop_down_circle_sharp,
+                        Icons.arrow_drop_down_rounded,
                         color: AppColor.mainTextColor,
                       ),
-                      hint: const Text('Select category'),
-                      value: selectedCategory,
+                      hint: Text(
+                        'Select category',
+                        style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16.sp,
+                                color: const Color(0xffA1A8B0))),
+                      ),
+                      value: controller.selectedCategory,
                       onChanged: (newValue) {
                         setState(() {
-                          selectedCategory = newValue;
+                          controller.selectedCategory = newValue;
                         });
                       },
                       items: categoryTitles.map((title) {
@@ -62,10 +72,11 @@ class _CategoerySelectState extends State<CategoerySelect> {
                             padding: EdgeInsets.symmetric(horizontal: 10.w),
                             child: Text(
                               title,
-                              style: GoogleFonts.poppins(
+                              style: GoogleFonts.inter(
                                   textStyle: TextStyle(
-                                      color: AppColor.mainTextColor,
-                                      fontWeight: FontWeight.w400)),
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColor.mainTextColor)),
                             ),
                           ),
                         );

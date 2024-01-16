@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../core/constant/constant.dart';
-import '../../login/view/login_page.dart';
-import '../../register/view/register_page.dart';
-import '../../../core/widget/constant_widget/const_widget/constant_widget.dart';
+import 'package:icare_vendor_app/src/core/constant/color.dart';
+import 'package:icare_vendor_app/src/core/widget/widget_collection/custom_widget.dart/button_widget.dart';
+import 'package:icare_vendor_app/src/feature/login/view/login_page.dart';
+import 'package:icare_vendor_app/src/feature/register/view/register_page.dart';
+import 'package:icare_vendor_app/src/feature/start/widget/landing_text.dart';
+
 import '../../../core/constant/sized_box.dart';
-import '../../../core/widget/widget_collection/custom_widget.dart/button_widget.dart';
 
 class LandingWidget extends StatelessWidget {
   const LandingWidget({super.key});
@@ -26,23 +27,35 @@ class LandingWidget extends StatelessWidget {
               width: 200.w,
               height: 90.h,
             ),
-            ConstantWidget.constDivider(),
+            AppSizes.mediumHeightSizedBox,
+            LandingText.mainText("Let’s get started!"),
+            AppSizes.smallHeightSizedBox,
+            LandingText.secText(
+                "Login to enjoy the features we’ve\n provided, and stay healthy!"),
+            AppSizes.largeHeightSizedBox,
             SizedBox(
-              height: 100.h,
-            ),
-            ButtonWidget(
+              width: 263.w,
+              height: 56.h,
+              child: ButtonWidget(
                 onTap: () {
                   Get.to(const LoginPage());
                 },
-                tilte: AppConst.login),
-            SizedBox(
-              height: AppConst.largeSize.h,
+                tilte: 'Login',
+                color: AppColor.mainTextColor,
+              ),
             ),
-            ButtonWidget(
+            AppSizes.smallHeightSizedBox,
+            SizedBox(
+              width: 263.w,
+              height: 56.h,
+              child: ButtonWidget(
                 onTap: () {
                   Get.to(const RegisterPage());
                 },
-                tilte: AppConst.signUp),
+                tilte: 'Sign Up',
+                color: AppColor.mainScaffoldBackgroundColor,
+              ),
+            ),
           ],
         ),
       ),
